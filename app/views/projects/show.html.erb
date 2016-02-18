@@ -2,7 +2,7 @@
 <p class="lead"><%= @project.description %></p>
 
 <div class="well">
-<h3>Latest Updates</h3>
+  <h3>Latest Updates</h3>
   <ul>
     <li>Add some cool feature | <small><a href="#">EDIT</a></small></li>
     <li>Add some cool feature | <small><a href="#">EDIT</a></small></li>
@@ -10,13 +10,22 @@
     <li>Add another cool feature</li>
     <li>Add serisouly one more amazing feature</li>
   </ul>
-<h3>Tasks</h3>
+  <h3>Tasks</h3>
+  <button id="task-toggle" class="btn btn-default">New Task</button>
+
+  <div id="add-task" class="initially-hidden">
+    <%= simple_form_for [@project, @task] do |f| %>
+    <%= f.input :title %>
+    <%= f.input :date_due, as: :date, start_year: Date.today.year,
+                                end_year: Date.today.year + 10,
+                                order: [:day,:month, :year] %>
+    <%= f.submit 'Create Task', class: 'btn btn-sm btn-primary' %>
+    <% end %>
+</div>
   <ul>
-    <li>Add some cool feature | <small><a href="#">EDIT</a></small></li>
-    <li>Add some cool feature | <small><a href="#">EDIT</a></small></li>
-    <li>Add some cool feature | <small><a href="#">EDIT</a></small></li>
-    <li>Add another cool feature</li>
-    <li>Add serisouly one more amazing feature</li>
+  <% @project.tasks.each do |task| %>
+    <li><%= task.title %></li>
+  <% end %>
   </ul>
 </div>
 

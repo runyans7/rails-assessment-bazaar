@@ -5,10 +5,11 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @task = Task.new
   end
 
   def new
-    @project = Project.new  
+    @project = Project.new 
   end
 
   def create
