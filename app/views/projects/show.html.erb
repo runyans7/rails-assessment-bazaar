@@ -14,9 +14,11 @@
   <button id="task-toggle" class="btn btn-default">New Task</button>
 
   <div id="add-task" class="initially-hidden">
-    <%= simple_form_for [@project, @task] do |f| %>
-    <%= f.input :title %>
-    <%= f.input :date_due, as: :date, start_year: Date.today.year,
+    <%= form_for [@project, @task] do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :date_due %>
+    <%= f.date_select :date_due, as: :date, start_year: Date.today.year,
                                 end_year: Date.today.year + 10,
                                 order: [:day,:month, :year] %>
     <%= f.submit 'Create Task', class: 'btn btn-sm btn-primary' %>
