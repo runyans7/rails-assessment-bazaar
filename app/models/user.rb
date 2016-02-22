@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable, :confirmable
 
   has_many :projects
+  has_many :project_collaborations
+  has_many :collaborations, through: :project_collaborations, source: :project
 end
