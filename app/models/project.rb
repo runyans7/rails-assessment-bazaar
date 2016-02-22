@@ -5,4 +5,12 @@ class Project < ActiveRecord::Base
 
   has_many :project_collaborations
   has_many :collaborators, through: :project_collaborations, source: :user
+
+  def is_collaborator
+    collaborators.map { |collaborator| collaborator.email }.join(', ')
+  end
+
+  def is_collaborator=(new_collaborator)
+    self.collaborators = new_collaborator.split(', ').map { |email| User.find_by(email: email) }
+  end
 end
