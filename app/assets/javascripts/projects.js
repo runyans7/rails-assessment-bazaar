@@ -1,6 +1,7 @@
 function copyText() {
   var textToCopy = $("#username_email").val();
   var existingText = $("#collaborator_list").val();
+
   if ($("#collaborator_list").val() == "") {
     $("#collaborator_list").val(textToCopy);
   } else {
@@ -9,9 +10,8 @@ function copyText() {
 }
 
 $(document).ready(function() {
-  var autocomplete_data = JSON.parse($("#username_email").attr("data"));
   $( "#username_email" ).autocomplete({
-    source: autocomplete_data
+    source: $("#username_email").data("emails")
   });
 
   $("#add_to_list").on("click", function(){

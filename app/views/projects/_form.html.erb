@@ -9,7 +9,7 @@
   </div>
   <div class"form-group">
     <%= f.label :is_collaborator, 'Search Users' %>
-    <input type="text" id="username_email" data="<%= User.order(:email).map(&:email) %>">
+    <input type="text" id="username_email" data-emails="<%= User.order(:email).map(&:email) %>">
     <div id="add_to_list" class="btn btn-xs btn-default">Add user</div>
     <%#= f.text_field id: 'username_email', data: { autocomplete_source: User.order(:email).map(&:email)} %>
     <%= f.text_area :is_collaborator, id: "collaborator_list" %>
