@@ -7,10 +7,10 @@ class Project < ActiveRecord::Base
   has_many :collaborators, through: :project_collaborations, source: :user
 
   def is_collaborator
-    collaborators.map { |collaborator| collaborator.email }.join(', ')
+    collaborators.try(:username) 
   end
 
   def is_collaborator=(new_collaborator)
-    self.collaborators = new_collaborator.split(', ').map { |email| User.find_by(email: email) }
+    self.collaborators << User.find_by(email: new_collaborator)
   end
 end
