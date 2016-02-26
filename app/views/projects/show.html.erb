@@ -16,7 +16,7 @@
   <h3>Tasks</h3>
   <button id="task-toggle" class="btn btn-default">New Task</button>
 
-  <div id="add-task" class="initially-hidden">
+  <div id="add-task" style="display: none">
     <%= form_for [@project, @task] do |f| %>
     <%= f.label :title %>
     <%= f.text_field :title %>

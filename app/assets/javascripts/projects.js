@@ -14,8 +14,12 @@ $(document).ready(function() {
     source: $("#username_email").data("emails")
   });
 
-  $("#add_to_list").on("click", function(){
+  $("#add_to_list").on("click", function() {
     copyText();
     $("#username_email").val("");
-  })
+  });
+
+  $("#task-toggle").click(function() {
+    $("div#add-task").toggle();
+  });
 });
