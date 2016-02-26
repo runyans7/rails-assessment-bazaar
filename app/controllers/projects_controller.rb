@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @projects = current_user.projects
   end
@@ -8,10 +8,11 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @task = Task.new
+    authorize @project
   end
 
   def new
-    @project = Project.new 
+    @project = Project.new
   end
 
   def create
