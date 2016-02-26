@@ -1,6 +1,10 @@
 <h1><%= @project.title %></h1>
 <p class="lead"><%= @project.description %></p>
-
+<div>
+  <% if policy(@project).edit? %>
+    <p><%= link_to 'Edit Project', edit_project_path(@project), class: 'btn btn-success' %></p>
+  <% end %>
+</div>
 <div class="well">
   <h3>Latest Updates</h3>
   <% if @project.recent_activity.empty? %>

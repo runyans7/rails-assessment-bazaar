@@ -7,8 +7,11 @@ class Project < ActiveRecord::Base
   has_many :project_collaborations
   has_many :collaborators, through: :project_collaborations, source: :user
 
+  after_save :add_user_as_admin
+  after_save :set_collaborator_role_to_user
+
   def is_collaborator
-    #collaborators.try(:email)
+    collaborators.map { |user| user.email }.join(', ')
   end
 
   def is_collaborator=(new_collaborators)
@@ -27,5 +30,20 @@ class Project < ActiveRecord::Base
   def recent_activity
     activity = recent_tasks + recent_collaborators
     activity.sort! { |a, b| a.created_at <=> b.created_at }.reverse!
+  end
+
+  private
+
+  def add_user_as_admin
+    if owner && !collaborators.include?(owner)
+      ProjectCollaboration.create(project_id: self.id, user_id: owner.id, role: 0)
+    end
+  end
+
+  def set_collaborator_role_to_user
+    self.project_collaborations.where(role: nil).each do |x|
+      x.role = 'user'
+      x.save
+    end
   end
 end
