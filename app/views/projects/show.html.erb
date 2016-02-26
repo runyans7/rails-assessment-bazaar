@@ -3,13 +3,16 @@
 
 <div class="well">
   <h3>Latest Updates</h3>
-  <ul>
-    <li>Add some cool feature | <small><a href="#">EDIT</a></small></li>
-    <li>Add some cool feature | <small><a href="#">EDIT</a></small></li>
-    <li>Add some cool feature | <small><a href="#">EDIT</a></small></li>
-    <li>Add another cool feature</li>
-    <li>Add serisouly one more amazing feature</li>
-  </ul>
+  <% if @project.recent_activity.empty? %>
+    <p class="no-activity">No recent activity here. Go ahead and get started!</p>
+  <% else %>
+    <ul>
+      <% @project.recent_activity.each do |item| %>
+        <li><%= display_recent_activity(item) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <h3>Tasks</h3>
   <button id="task-toggle" class="btn btn-default">New Task</button>
 
@@ -23,11 +26,21 @@
                                 order: [:day,:month, :year] %>
     <%= f.submit 'Create Task', class: 'btn btn-sm btn-primary' %>
     <% end %>
-</div>
-  <ul>
-  <% @project.tasks.each do |task| %>
-    <li><%= task.title %></li>
-  <% end %>
-  </ul>
-</div>
+  </div>
 
+  <% if @project.tasks.empty? %>
+    <p class="no-activity">No open tasks. Click above to create a new one!</p>
+  <% else %>
+    <ul>
+    <% @project.tasks.each do |task| %>
+      <li>
+        <% if task.overdue? %>
+          <span class="badge">Overdue</span>
+        <% end %>
+        <span class=<%= format_overdue_tasks(task) %>><%= task.title %></span>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+
+</div>
