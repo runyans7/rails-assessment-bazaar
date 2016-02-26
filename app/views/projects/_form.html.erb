@@ -10,9 +10,8 @@
   <div class"form-group">
     <%= f.label :is_collaborator, 'Search Users' %>
     <input type="text" id="username_email" data-emails="<%= User.order(:email).map(&:email) %>">
-    <div id="add_to_list" class="btn btn-xs btn-default">Add user</div>
-    <%#= f.text_field id: 'username_email', data: { autocomplete_source: User.order(:email).map(&:email)} %>
+    <div id="add_to_list" class="btn btn-xs btn-default">Add user</div><br/>
     <%= f.text_area :is_collaborator, id: "collaborator_list" %>
   </div>
-  <%= f.submit 'Create Project', class: 'btn btn-primary' %>
+  <%= f.submit @project.new_record? ? 'Create Project' : 'Update Project', class: 'btn btn-primary' %>
 <% end %>

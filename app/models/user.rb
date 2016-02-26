@@ -1,3 +1,4 @@
+require 'pry'
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
@@ -9,6 +10,6 @@ class User < ActiveRecord::Base
   has_many :collaborations, through: :project_collaborations, source: :project
 
   def project_role(project)
-    item = project_collaborations.where("user_id = ? AND project_id = ?", self.id, project.id).first
+    project_collaborations.where("user_id = ? AND project_id = ?", self.id, project.id).first
   end
 end
