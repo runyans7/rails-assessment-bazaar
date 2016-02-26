@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   has_many :collaborations, through: :project_collaborations, source: :project
 
   def project_role(project)
-    project_collaborations.where("user_id = ? AND project_id = ?", self.id, project.id).first 
+    item = project_collaborations.where("user_id = ? AND project_id = ?", self.id, project.id).first
   end
 end
