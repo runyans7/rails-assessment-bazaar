@@ -20,8 +20,19 @@
   <h3>Tasks</h3>
   <button id="task-toggle" class="btn btn-default">New Task</button>
 
-  <div id="add-task" style="display: none">
+  <div id="add-task">
     <%= form_for [@project, @task] do |f| %>
+    <% if @task.errors.any? %>
+      <h3 class="field_with_errors">
+        <%= pluralize(@task.errors.count, "error") %>
+        prohibited this task from being saved:
+      </h3 class="field_with_errors">
+      <ul class="field_with_errors">
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <%= f.label :title %>
     <%= f.text_field :title %>
     <%= f.label :date_due %>
@@ -41,7 +52,7 @@
         <% if task.overdue? %>
           <span class="badge">Overdue</span>
         <% end %>
-        <span class=<%= format_overdue_tasks(task) %>><%= task.title %></span>
+        <span class=<%= format_overdue_tasks(task) %>><%= task.title %> | <%= task.date_due %></span>
       </li>
     <% end %>
     </ul>

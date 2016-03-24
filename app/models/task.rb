@@ -1,4 +1,7 @@
 class Task < ActiveRecord::Base
+
+  validates_presence_of :title
+
   belongs_to :project
   belongs_to :user
 
