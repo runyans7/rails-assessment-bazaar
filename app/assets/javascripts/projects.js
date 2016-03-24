@@ -22,4 +22,5 @@ $(document).ready(function() {
   $("#task-toggle").click(function() {
     $("div#add-task").toggle();
   });
+
 });

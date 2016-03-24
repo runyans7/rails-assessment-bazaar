@@ -21,7 +21,7 @@
   <button id="task-toggle" class="btn btn-default">New Task</button>
 
   <div id="add-task">
-    <%= form_for [@project, @task] do |f| %>
+    <%= form_for [@project, @task], remote: true do |f| %>
     <% if @task.errors.any? %>
       <h3 class="field_with_errors">
         <%= pluralize(@task.errors.count, "error") %>
@@ -46,15 +46,8 @@
   <% if @project.tasks.empty? %>
     <p class="no-activity">No open tasks. Click above to create a new one!</p>
   <% else %>
-    <ul>
-    <% @project.tasks.each do |task| %>
-      <li>
-        <% if task.overdue? %>
-          <span class="badge">Overdue</span>
-        <% end %>
-        <span class=<%= format_overdue_tasks(task) %>><%= task.title %> | <%= task.date_due %></span>
-      </li>
-    <% end %>
+    <ul id="task-list">
+      <%= render 'tasks/task' %>
     </ul>
   <% end %>
 
