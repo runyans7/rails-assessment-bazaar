@@ -1,2 +1,3 @@
 $('#task_title').val("");
-$('#task-list').html("<%= j render partial: 'task' %>");
+var $ul = $("#task-list");
+$ul.html("<%= j(render('tasks/task', :project => @project)) %>");

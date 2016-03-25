@@ -1,0 +1,31 @@
+
+<h1 id="taskTitle"><%= @task.title %></h1>
+<br>
+<p id="taskDateDue"><%= @task.date_due %></p>
+
+<%= link_to 'Back to project', project_path(@project), class: 'btn btn-default' %>
+<button id="js-next-task" class="btn btn-success">Next Task</button>
+
+<script>
+  var taskArray;
+  var index = 0;
+  var projectId = <%= @task.project.id %>
+
+  // GET request to retun array of project tasks IDs
+  $.get("/projects/" + projectId + "/tasks.json", function(data) {
+    var tasks = data["tasks"];
+    taskArray = tasks.map(function(a) { return a.id; });
+  }).done(function() {
+    $("#js-next-task").on("click", function() {
+      index++;
+      var nextId = taskArray[index];
+
+      // Get request to get JSON of each task
+      $.get("/projects/" + projectId + "/tasks/" + nextId + ".json", function(data) {
+        var task = data["task"];
+        $("#taskTitle").text(task["title"]);
+        $("#taskDateDue").text(task["date_due"]);
+      });
+    });
+  })
+</script>

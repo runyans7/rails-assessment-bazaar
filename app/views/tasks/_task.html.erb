@@ -1,8 +1,8 @@
-<% @project.tasks.each do |task| %>
-  <li>
-    <% if task.overdue? %>
-      <span class="badge">Overdue</span>
-    <% end %>
-    <span class=<%= format_overdue_tasks(task) %>><%= task.title %> | <%= task.date_due %></span>
-  </li>
+<% project.tasks.each do |task| %>
+<li>
+  <% if task.overdue? %>
+  <span class="badge">Overdue</span>
+  <% end %>
+  <span class=<%= format_overdue_tasks(task) %>><%= link_to task.title, project_task_path(project, task) %> | <%= task.date_due %></span>
+</li>
 <% end %>
