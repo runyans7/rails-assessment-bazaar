@@ -20,7 +20,7 @@
   <h3>Tasks</h3>
   <button id="task-toggle" class="btn btn-default">New Task</button>
 
-  <div id="add-task">
+  <div id="add-task" style="display:none;">
     <%= form_for [@project, @task], remote: true do |f| %>
     <% if @task.errors.any? %>
       <h3 class="field_with_errors">

@@ -11,14 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require bootstrap
 //= require jquery-ui/autocomplete
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-$(document).ready(function() {
-  $("#task-toggle").click(function() {
-    $("#add-task").toggle();
-  });
-});

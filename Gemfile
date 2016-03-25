@@ -17,6 +17,7 @@ gem 'pundit'
 gem 'omniauth-facebook'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'active_model_serializers'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'pry-rails'
